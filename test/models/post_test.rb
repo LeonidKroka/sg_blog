@@ -5,4 +5,9 @@ class PostTest < ActiveSupport::TestCase
     Post.create(body: "aaa")
     assert_equal 0, Post.all.count
   end
+
+  def test_body_should_be_present
+    Post.create(title: "aaa")
+    assert_equal 0, Post.all.count
+  end
 end
