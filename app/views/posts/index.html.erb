@@ -1,7 +1,11 @@
-<h2> SG Blog </h2>
-
-<ul>
-  <% @posts.each do |post| %>
-    <li class="post-title"><%= link_to post.title, post %>  </li>
-  <% end %>
-</ul>
+<body>
+  <div class="post-list">
+    <h2> SG Blog </h2>
+    <ul>
+      <% @posts.each do |post| %>
+        <li class="post-title"><%= link_to post.title, post %>  </li>
+      <% end %>
+    </ul>
+    <%= button_to "New Post", new_post_path, method: "get" %>
+  </div>
+</body>

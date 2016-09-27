@@ -15,6 +15,6 @@ class RootTest < ActiveSupport::TestCase
   end
 
   def create_ten_posts
-    10.times { |n| Post.create(title: "a_#{n}", body: "AAAA") }
+    10.times { |n| Post.create(title: "aaaa#{n}", body: "A"*200) }
   end
 end

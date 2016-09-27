@@ -2,7 +2,7 @@ require "test_helper"
 
 class PostPageTest < ActiveSupport::TestCase
   def setup
-    3.times { |n| Post.create(title: "a_#{n}", body: "AAAA_#{n}") }
+    3.times { |n| Post.create(title: "aaaa#{n}", body: "AAAAA"*20+"#{n}") }
   end
 
   def test_posts_title_should_be_present

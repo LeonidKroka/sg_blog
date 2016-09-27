@@ -1,0 +1,43 @@
+<body>
+  <div class="post-create">
+    <h2>New post</h2>
+
+    <%= form_for @post do |form| %>
+      <% if @post.errors.any? %>
+        <h1 class="title-error-message">
+          Sorry, your post is not valid. Please, try again.
+        </h1>
+      <% end %>
+
+      <% if @post.errors[:title].any? %>
+        <div class="error-message">
+          <ul>
+            <% @post.errors[:title].each do |msg| %>
+            <li>*<%= msg.capitalize %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <span class="post-label">
+        <%= form.label :title %>
+      </span>
+      <%= form.text_field :title, class: "post-create-title" %> <br>
+
+      <% if @post.errors[:body].any? %>
+        <div class="error-message">
+          <ul>
+            <% @post.errors[:body].each do |msg| %>
+            <li>*<%= msg.capitalize %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <span class="post-label">
+        <%= form.label :body %>
+      </span>
+      <%= form.text_area :body, class: "post-create-body" %> <br>
+
+      <%= form.submit class: "post-save" %>
+    <% end %>
+  </div>
+</body>
