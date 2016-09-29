@@ -3,7 +3,7 @@
     <h2>Post's view</h2>
     <p> <span>Title:</span><%= @post.title %> </p>
     <p> <span>Post:</span><%= @post.body %> </p>
-    <button class="post-action">Edit Post</button>
-    <button class="post-action">Delete Post</button>
+    <%= button_to "Edit Post", edit_post_path, method: :get, form_class: "post-action" %>
+    <%= button_to "Delete Post", post_path(@post.id), method: :delete, form_class: "post-action" %>
   </div>
 </body>

@@ -24,12 +24,13 @@ div.post-view span
   padding-right: 10px;
 }
 
-div.post-view button
+div.post-view .post-action
 {
   margin-left: 200px;
+  float: left;
 }
 
-div.post-view button+button
+div.post-view .post-action+.post-action
 {
   margin-left: 10px;
 }

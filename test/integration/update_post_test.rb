@@ -1,29 +1,24 @@
 require "test_helper"
 
-class NewPostTest < ActiveSupport::TestCase
+class EditPostTest < ActiveSupport::TestCase
   def setup
-    visit "/posts/new"
+    Post.create(title: "aaaa1", body: "A"*200)
+    visit "/posts/1/edit"
   end
 
-  def test_create_new_post_and_press_submit_must_add_new_post
+  def test_edit_post_and_press_submit_should_update_this_post
     fill_in("Title", :with => post_content[:title][:valid])
     fill_in("Body", :with => post_content[:body][:valid])
-    click_button "Create Post"
+    click_button "Update Post"
     assert_equal 1, Post.all.count
+    assert_equal post_content[:title][:valid], Post.all[0].title
   end
 
-  def test_show_error_message_when_post_should_not_be_created
+  def test_show_error_message_when_post_can_not_be_updated
     fill_in("Title", :with => post_content[:title][:invalid])
-    fill_in("Body", :with => post_content[:body][:valid])
-    click_button "Create Post"
+    fill_in("Body", :with => post_content[:body][:invalid])
+    click_button "Update Post"
     assert page.has_content?(error_message)
-  end
-
-  def test_show_post_after_it_should_be_created
-    fill_in("Title", :with => post_content[:title][:valid])
-    fill_in("Body", :with => post_content[:body][:valid])
-    click_button "Create Post"
-    assert page.has_content?(post_content[:title][:valid])
   end
 
   private

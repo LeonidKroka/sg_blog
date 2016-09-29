@@ -29,6 +29,7 @@ class PostPageTest < ActiveSupport::TestCase
     posts_db_each_visit{ assert_equal 2, page.all("button.post-action").count }
   end
 
+  private
   def posts_db_each_visit &block
     Post.all.each do |post|
       visit "/posts/#{post.id}"
