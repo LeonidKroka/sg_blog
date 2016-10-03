@@ -1,0 +1,52 @@
+@charset "utf-8";
+
+div.post-forms
+{
+  width: 40%;
+  margin: auto;
+
+  h1.title-error-message
+  {
+    color: red;
+    margin-left: -30px;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .error-message
+  {
+    color: red;
+    margin-left: 10%;
+    font-size: 12px;
+  }
+
+  .post-create-title
+  {
+    width: 90%;
+    margin-bottom: 2%;
+    margin-left: 10%;
+  }
+
+  .post-create-body
+  {
+    width: 90%;
+    height: 200px;
+    margin-bottom: 2%;
+    margin-left: 10%;
+  }
+
+  span.post-label
+  {
+    display: block;
+    float: left;
+    margin-left: -30px;
+    padding-top: 1%;
+    margin-bottom: -3%;
+  }
+
+  .post-save
+  {
+    width: 100px;
+    margin-left: 45%;
+  }
+}
