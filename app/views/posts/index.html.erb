@@ -1,11 +1,10 @@
-<body>
-  <div class="post-list">
-    <h2> SG Blog </h2>
-    <ul>
-      <% @posts.each do |post| %>
-        <li class="post-title"><%= link_to post.title, post %>  </li>
-      <% end %>
-    </ul>
-    <%= button_to "New Post", new_post_path, method: "get" %>
-  </div>
-</body>
+<% provide(:title, 'Home') %>
+<div class="post-list">
+  <h2> SG Blog </h2>
+  <% @posts.each do |post| %>
+    <%= link_to post_path(post.id), class: "list-group-item" do %>
+      <h4 class="list-group-item-heading"><%= post.title %></h4>
+      <p class="list-group-item-text"><%= limited_posts_body(post.body) %></p>
+    <% end %>
+  <% end %>
+</div>

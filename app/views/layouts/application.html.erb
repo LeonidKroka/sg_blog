@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SgBlog</title>
+  <title>SG Blog | <%= yield(:title) %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class="container">
-  <div class="row">
+  <%= render 'layouts/header' %>
+
+  <div class="container">
     <%= yield %>
   </div>
-</div>
+
+  <%= render 'layouts/footer' %>
 
 </body>
 </html>
