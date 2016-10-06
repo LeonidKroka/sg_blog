@@ -11,12 +11,12 @@ class RootTest < ActiveSupport::TestCase
   end
 
   def test_visit_home_page_and_see_ten_post_titles
-    assert_equal 10, page.all("li.post-title").count
+    assert_equal 10, page.all(".list-group-item").count
   end
 
   private
   def create_ten_posts
     10.times { |n| Post.create(title: "aaaa#{n}", body: "A"*200) }
   end
-  
+
 end

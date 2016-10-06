@@ -8,21 +8,21 @@ class NewPostTest < ActiveSupport::TestCase
   def test_create_new_post_and_press_submit_must_add_new_post
     fill_in("Title", :with => post_content[:title][:valid])
     fill_in("Body", :with => post_content[:body][:valid])
-    click_button "Create Post"
+    click_button "Make'em create"
     assert_equal 1, Post.all.count
   end
 
   def test_show_error_message_when_post_should_not_be_created
     fill_in("Title", :with => post_content[:title][:invalid])
     fill_in("Body", :with => post_content[:body][:valid])
-    click_button "Create Post"
+    click_button "Make'em create"
     assert page.has_content?(error_message)
   end
 
   def test_show_post_after_it_should_be_created
     fill_in("Title", :with => post_content[:title][:valid])
     fill_in("Body", :with => post_content[:body][:valid])
-    click_button "Create Post"
+    click_button "Make'em create"
     assert page.has_content?(post_content[:title][:valid])
   end
 

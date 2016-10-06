@@ -1,8 +1,8 @@
  @charset "utf-8";
- @import "reset.css";
- @import "style-index.css.scss";
- @import "style-show.css.scss";
- @import "style-new.css.scss";
- @import "style-_form.css.scss";
+ @import url("reset.css");
+ @import url("style-index.scss");
+ @import url("style-show.scss");
+ @import url("style-new.scss");
+ @import url("style-_form.scss");
  @import "bootstrap";
- @import "custom.css.scss"
+ @import url("custom.scss");

@@ -34,6 +34,10 @@
     </span>
     <%= form.text_area :body, class: "post-create-body" %> <br>
 
-    <%= form.submit class: "post-save" %>
+    <div class="text-center">
+      <%= button_tag(type: 'submit', class: "btn btn-sm btn-warning") do %>
+        Make'em <%= yield(:title).downcase %>
+      <% end %>
+    </div>
   <% end %>
 </div>
