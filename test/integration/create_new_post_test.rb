@@ -26,6 +26,14 @@ class NewPostTest < ActiveSupport::TestCase
     assert page.has_content?(post_content[:title][:valid])
   end
 
+  def test_can_add_image_when_new_creating
+    fill_in("Title", :with => post_content[:title][:valid])
+    fill_in("Body", :with => post_content[:body][:valid])
+    attach_file("post_image", "#{Rails.root}/test/fixtures/files/some.jpg")
+    click_button "Make'em create"
+    assert page.has_selector?("img")
+  end
+
   private
   def post_content
     {:title => {:valid => "True title",

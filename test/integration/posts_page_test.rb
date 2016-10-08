@@ -2,7 +2,7 @@ require "test_helper"
 
 class PostPageTest < ActiveSupport::TestCase
   def setup
-    3.times { |n| Post.create(title: "aaaa#{n}", body: "AAAAA"*20+"#{n}") }
+    3.times { |n| Post.create(title: "aaaa#{n}", body: "AAAAA"*200+"#{n}") }
   end
 
   def test_posts_title_should_be_present
@@ -27,6 +27,14 @@ class PostPageTest < ActiveSupport::TestCase
 
   def test_buttons_should_be_present
     posts_db_each_visit{ assert_equal 2, page.all("button.post-action").count }
+  end
+
+  def test_posts_img_should_be_present_only_if_it_added_to_post
+    Post.create(title: "aaaaa", body: "AAAAA"*200, image: File.open("#{Rails.root}/test/fixtures/files/some.jpg"))
+    visit "/posts/4"
+    assert page.has_selector?("img")
+    visit "/posts/3"
+    assert page.has_no_selector?("img")
   end
 
   private

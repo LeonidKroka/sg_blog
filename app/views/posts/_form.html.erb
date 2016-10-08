@@ -28,6 +28,10 @@
     </p>
     <p class="post-img-form">
       <%= form.file_field :image %><br>
+      <label>
+        <%= form.check_box :remove_image %>
+        Remove avatar
+      </label>
     </p>
 
     <% if @post.errors[:body].any? %>

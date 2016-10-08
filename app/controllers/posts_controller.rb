@@ -27,6 +27,7 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
+    @post.remove_image! if params.require(:post).require(:remove_image).to_i==1
 
     if @post.update(post_params)
       redirect_to @post
@@ -37,6 +38,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
+    @post.remove_image!
     @post.destroy
 
     redirect_to "/"
