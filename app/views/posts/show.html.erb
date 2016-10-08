@@ -2,6 +2,7 @@
 <div class="post-view">
   <h2>Post's view</h2>
   <p> <span>Title:</span><%= @post.title %> </p>
+  <p class="post-img"><%= image_tag @post.image.url unless @post.image.file.nil? %></p>
   <p> <span>Post:</span><%= @post.body %> </p>
   <%= button_tag class: "post-action btn btn-sm btn-warning" do %>
     <%= link_to "Edit Post", edit_post_path, method: :get %>

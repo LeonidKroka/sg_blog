@@ -8,6 +8,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'bootstrap-sass'
+gem 'carrierwave'
 
 group :development, :test do
   gem 'byebug'

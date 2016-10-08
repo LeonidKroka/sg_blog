@@ -20,6 +20,16 @@
     </span>
     <%= form.text_field :title, class: "post-create-title" %> <br>
 
+    <span class="post-label">
+      <%= form.label :image %>
+    </span>
+    <p class="post-img">
+      <%= image_tag (@post.image.url) unless @post.image.file.nil? %>
+    </p>
+    <p class="post-img-form">
+      <%= form.file_field :image %><br>
+    </p>
+
     <% if @post.errors[:body].any? %>
       <div class="error-message">
         <ul>

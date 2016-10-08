@@ -54,6 +54,13 @@ p {
   line-height: 1.7em;
 }
 
+.main-content {
+  min-height: 100vh;
+  padding-top: 50px;
+  margin-top: -50px;
+  padding-bottom: 30px;
+}
+
 
 /* header */
 
@@ -82,8 +89,7 @@ p {
 
 footer {
   padding-top: 5px;
-  position: absolute;
-  bottom: 0px;
+  margin-top: -22px;
   width: 100%;
   border-top: 1px solid $grayMediumLight;
   background-color: rgba(56, 37, 37, 0.2);
