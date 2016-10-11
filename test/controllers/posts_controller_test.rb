@@ -2,7 +2,7 @@ require "test_helper"
 
 class PostControllerTest < ActionDispatch::IntegrationTest
   def setup
-    create_ten_posts
+    create_three_posts
     visit "/"
   end
 
@@ -45,7 +45,7 @@ class PostControllerTest < ActionDispatch::IntegrationTest
   end
 
   private
-  def create_ten_posts
+  def create_three_posts
     3.times { |n| Post.create(title: "aaaa#{n}", body: "A"*200) }
   end
 

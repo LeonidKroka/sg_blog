@@ -37,6 +37,11 @@ class PostPageTest < ActiveSupport::TestCase
     assert page.has_no_selector?("img")
   end
 
+  def test_show_page_must_have_comments_form
+    visit "/posts/1"
+    assert page.has_selector?("textarea")
+  end
+
   private
   def posts_db_each_visit &block
     Post.all.each do |post|

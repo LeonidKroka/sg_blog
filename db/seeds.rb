@@ -47,6 +47,17 @@ def posts_body
     dapibus tellus, at tristique enim ultricies eget."]
 end
 
+def comments_body
+  ["What is it?",
+   "+100500",
+   "I do not understand the author",
+   "What am I doing here?",
+   "Very nice"]
+end
+
 ActiveRecord::Base.connection.execute("DELETE FROM posts")
 ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence where name='posts'")
-5.times { |n| Post.create(title: posts_title[n-1], body: posts_body[n-1]) }
+5.times do |n|
+  Post.create(title: posts_title[n-1], body: posts_body[n-1])
+  15.times {|m| Post.all[n].comments.create(:body => comments_body.sample)}
+end
