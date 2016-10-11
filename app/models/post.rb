@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+  has_many :comments
 
   validates_presence_of :title, :body
   validates :title, length: { in: 5..30 }
