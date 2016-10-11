@@ -8,20 +8,17 @@ class CommentsController < ApplicationController
 
   def edit
     @post = Post.find(params[:post_id])
+    @comment = @post.comments.find(params[:id])
     respond_to do |format|
-      format.html { redirect_to @post }
-      format.js 
+      format.js
     end
   end
 
   def update
     @post = Post.find(params[:post_id])
-    @comment = @post.comments[params[:id]]
-    if @comment.update(comment_params)
-      redirect_to @post
-    else
-      render 'edit'
-    end
+    @comment = @post.comments.find(params[:id])
+    @comment.update(comment_params)
+    redirect_to @post
   end
 
   private

@@ -1,0 +1,8 @@
+<div class="comment-edit-forms">
+  <%= form_for([@post, @comment]) do |form| %>
+    <%= form.text_area :body, class: "comment-edit" %>
+    <%= button_tag(type: 'submit', class: "btn btn-sm") do %>
+      It's ok!
+    <% end %>
+  <% end %>
+</div>
