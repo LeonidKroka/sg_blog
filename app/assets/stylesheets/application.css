@@ -4,5 +4,6 @@
  @import url("style-show.scss");
  @import url("style-new.scss");
  @import url("style-_form.scss");
+ @import url("comments.scss");
  @import "bootstrap";
  @import url("custom.scss");
