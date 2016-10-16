@@ -57,6 +57,8 @@ end
 
 ActiveRecord::Base.connection.execute("DELETE FROM posts")
 ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence where name='posts'")
+ActiveRecord::Base.connection.execute("DELETE FROM comments")
+ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence where name='comments'")
 5.times do |n|
   Post.create(title: posts_title[n-1], body: posts_body[n-1])
   15.times {|m| Post.all[n].comments.create(:body => comments_body.sample)}

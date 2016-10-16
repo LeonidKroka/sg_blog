@@ -5,17 +5,19 @@
 <div class="comment-forms">
   <%= form_for([@post, @post.comments.build], remote: true) do |form| %>
     <%= form.text_area :body, class: "comment-create" %>
-    <%= button_tag(type: 'submit', action: :post, class: "btn btn-sm new-comment", remote: true) do %>
+    <%= button_tag(type: 'submit', action: :post, class: "btn btn-sm new-comment") do %>
       It's ok!
     <% end %>
   <% end %>
 </div>
 
 <div class="comments">
+  <%= will_paginate @comments %>
   <% @comments.each do |comment| %>
     <div class="list-group-item" id=<%= "comment-#{comment.id}" %> >
       <p><%= comment.body %></p>
       <%= link_to "Edit", edit_post_comment_path(@post, comment), remote: true %>
     </div>
   <% end %>
+  <%= will_paginate @comments %>
 </div>

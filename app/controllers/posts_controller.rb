@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @comments = @post.comments.latest_ten
+    @comments = @post.comments.paginate(page: params[:page], per_page: 10).order('id DESC')
   end
 
   def new

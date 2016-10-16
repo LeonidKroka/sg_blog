@@ -1,7 +1,7 @@
 <div class="comment-edit-forms">
   <%= form_for([@post, @comment], remote: true) do |form| %>
     <%= form.text_area :body, class: "comment-edit" %>
-    <%= button_tag(type: 'submit', class: "btn btn-sm", remote: true) do %>
+    <%= button_tag(type: 'submit', class: "btn btn-sm") do %>
       Now ok!
     <% end %>
   <% end %>
