@@ -1,0 +1,21 @@
+<h3>Comments</h3>
+<% if @post.comments.all.count==0 %>
+  <h3>Post nobody has commented. Please leave your comments.</h3>
+<% end %>
+<div class="comment-forms">
+  <%= form_for([@post, @post.comments.build], remote: true) do |form| %>
+    <%= form.text_area :body, class: "comment-create" %>
+    <%= button_tag(type: 'submit', action: :post, class: "btn btn-sm new-comment", remote: true) do %>
+      It's ok!
+    <% end %>
+  <% end %>
+</div>
+
+<div class="comments">
+  <% @comments.each do |comment| %>
+    <div class="list-group-item" id=<%= "comment-#{comment.id}" %> >
+      <p><%= comment.body %></p>
+      <%= link_to "Edit", edit_post_comment_path(@post, comment), remote: true %>
+    </div>
+  <% end %>
+</div>

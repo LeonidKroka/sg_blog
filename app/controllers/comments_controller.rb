@@ -2,8 +2,10 @@ class CommentsController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.create(comment_params)
-
-    redirect_to post_path(@post)
+    @comments = @post.comments.latest_ten
+    respond_to do |format|
+      format.js
+    end
   end
 
   def edit
@@ -18,7 +20,10 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = @post.comments.find(params[:id])
     @comment.update(comment_params)
-    redirect_to @post
+    @comments = @post.comments.latest_ten
+    respond_to do |format|
+      format.js
+    end
   end
 
   private
