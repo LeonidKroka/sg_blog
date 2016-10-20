@@ -1,3 +1,9 @@
-$('#comments').html("")
-$("<%= escape_javascript(render(partial: 'posts/comments', :locals => {:post => @post, :comments => @comments })) %>")
-.appendTo("#comments");
+<% if @comment.errors.any? %>
+  $('#comment-<%= @comment.id %>').html("")
+  $('#comment-<%= @comment.id %>')
+  .append("<%= j render(partial: 'comments/edit', :locals => {:post => @post, :comment => @comment, :flash => flash }) %>")
+<% else %>
+  $('#comments').html("")
+  $("<%= escape_javascript(render(partial: 'posts/comments', :locals => {:post => @post, :comments => @comments })) %>")
+  .appendTo("#comments");
+<% end %>

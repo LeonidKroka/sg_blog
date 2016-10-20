@@ -1,6 +1,8 @@
 <div class="comment-edit-forms">
+  <%= content_tag(:div, flash[:errors], class: "alert-errors") %>
   <%= form_for([@post, @comment], remote: true) do |form| %>
-    <%= form.text_area :body, class: "comment-edit" %>
+    <%= form.text_area :body, class: "comment-edit",
+                              style: flash[:style] %>
     <%= button_tag(type: 'submit', class: "btn btn-sm") do %>
       Now ok!
     <% end %>

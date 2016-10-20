@@ -3,8 +3,11 @@
   <h3>Post nobody has commented. Please leave your comments.</h3>
 <% end %>
 <div class="comment-forms">
+  <%= content_tag(:div, flash[:errors], class: "alert-errors") %>
   <%= form_for([@post, @post.comments.build], remote: true) do |form| %>
-    <%= form.text_area :body, class: "comment-create" %>
+    <%= form.text_area :body, class: "comment-create",
+                              value: flash[:body],
+                              style: flash[:style] %>
     <%= button_tag(type: 'submit', action: :post, class: "btn btn-sm new-comment") do %>
       It's ok!
     <% end %>
