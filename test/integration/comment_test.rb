@@ -1,6 +1,6 @@
 require "test_helper"
 
-class EditPostTest < ActionDispatch::IntegrationTest
+class PostCommentTest < ActionDispatch::IntegrationTest
   def setup
     Post.create(title: "aaaa1", body: "A"*200)
   end
@@ -21,9 +21,9 @@ class EditPostTest < ActionDispatch::IntegrationTest
 
   def test_coment_form_should_have_error_message
     visit post_path(id: 1)
-    find("#comment_body").set("")
+    find("#comment_body").set("a"*201)
     find("#new_comment.new_comment").click
-    assert page.has_content? ("div.alert-errors")
+    assert page.has_selector? ("div.alert-errors")
   end
 
   def test_one_page_show_only_ten_comments
