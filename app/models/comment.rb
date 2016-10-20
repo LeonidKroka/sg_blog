@@ -1,7 +1,7 @@
 class Comment < ActiveRecord::Base
   belongs_to :post
 
-  VALID_REGEX = /\A(?!.*first post)(?!.*http).*\z/i
+  VALID_REGEX = /\A(?!.*(first post|http:\/\/|https:\/\/)).*\z/i
   validates :body, presence: true,
                    length: { in: 1..200},
                    format: { with: VALID_REGEX }
