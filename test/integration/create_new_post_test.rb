@@ -9,6 +9,7 @@ class NewPostTest < ActiveSupport::TestCase
     fill_in("Title", :with => post_content[:title][:valid])
     fill_in("Body", :with => post_content[:body][:valid])
     click_button "Make'em create"
+    assert page.has_content?(post_content[:title][:valid])
     assert_equal 1, Post.all.count
   end
 
@@ -17,13 +18,6 @@ class NewPostTest < ActiveSupport::TestCase
     fill_in("Body", :with => post_content[:body][:valid])
     click_button "Make'em create"
     assert page.has_content?(error_message)
-  end
-
-  def test_show_post_after_it_should_be_created
-    fill_in("Title", :with => post_content[:title][:valid])
-    fill_in("Body", :with => post_content[:body][:valid])
-    click_button "Make'em create"
-    assert page.has_content?(post_content[:title][:valid])
   end
 
   def test_can_add_image_when_new_creating

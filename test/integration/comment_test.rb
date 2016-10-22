@@ -1,5 +1,3 @@
-require "test_helper"
-
 class PostCommentTest < ActionDispatch::IntegrationTest
   def setup
     Post.create(title: "aaaa1", body: "A"*200)
@@ -19,11 +17,43 @@ class PostCommentTest < ActionDispatch::IntegrationTest
     assert_equal 0, Post.all[0].comments.count
   end
 
-  def test_coment_form_should_have_error_message
+  def test_create_new_valid_comment
+    visit post_path(id: 1)
+    find("#comment_body").set("Something")
+    click_on "It's ok!"
+    assert page.has_content? ("Something")
+  end
+
+  def test_invalid_coment_form_should_have_error_message_and_red_border
     visit post_path(id: 1)
     find("#comment_body").set("a"*201)
-    find("#new_comment.new_comment").click
-    assert page.has_selector? ("div.alert-errors")
+    click_on "It's ok!"
+    within("div.alert-errors") { assert page.has_content? ("is too long") }
+    assert page.find_by_id('comment_body')[:style].include?('red')
+  end
+
+  def test_invalid_coment_edit_form_should_have_error_message_and_red_border
+    Post.all[0].comments.create(:body => "valid")
+    visit post_path(id: 1)
+    within("div.comments") { click_on "Edit" }
+    within("div.comment-edit-forms") do
+      find("#comment_body").set("a"*201)
+      click_on "Now ok!"
+      assert page.has_content? ("is too long")
+      assert page.find_by_id('comment_body')[:style].include?('red')
+    end
+  end
+
+  def test_valid_coment_edit_should_update_comment_and_hide_comment_edit_form
+    Post.all[0].comments.create(:body => "valid")
+    visit post_path(id: 1)
+    within("div.comments") { click_on "Edit" }
+    within("div.comment-edit-forms") do
+      find("#comment_body").set("Something")
+      click_on "Now ok!"
+    end
+    within("div.comments") { assert page.has_content? ("Something") }
+    assert_equal 0, page.all(".comment-edit-forms").count
   end
 
   def test_one_page_show_only_ten_comments
@@ -32,5 +62,4 @@ class PostCommentTest < ActionDispatch::IntegrationTest
     assert_equal 10, page.all(".list-group-item").count
     assert_equal 2, (page.all(".pagination li").count-4)/2
   end
-
 end

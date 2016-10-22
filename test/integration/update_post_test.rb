@@ -6,10 +6,11 @@ class EditPostTest < ActiveSupport::TestCase
     visit "/posts/1/edit"
   end
 
-  def test_edit_post_and_press_submit_should_update_this_post
+  def test_edit_post_and_press_submit_should_update_this_post_and_show_updated_post
     fill_in("Title", :with => post_content[:title][:valid])
     fill_in("Body", :with => post_content[:body][:valid])
     click_button "Make'em edit"
+    assert page.has_content?(post_content[:title][:valid])
     assert_equal 1, Post.all.count
     assert_equal post_content[:title][:valid], Post.all[0].title
   end

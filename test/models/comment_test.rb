@@ -1,13 +1,18 @@
 require "test_helper"
 
 class CommentTest < ActiveSupport::TestCase
-
-  def test_coment_can_be_valid
-    assert Comment.new(:body => "some text").valid?
+  def test_comment_validation
+    comment_body[:invalid].each do |body|
+      assert Comment.new(body: body).invalid?
+    end
+    comment_body[:valid].each do |body|
+      assert Comment.new(body: body).valid?
+    end
   end
 
-  def test_coment_shoud_not_created_when_it_has_more_200_length
-    assert_not Comment.new(:body => "a"*201).valid?
-  end
-
+  private
+    def comment_body
+      {:valid => ["+", "Some text", "First chang in post", "HTTP-server"],
+       :invalid => ["", "a"*201, "afsdfhttp://vk.comdfas", "some first post"]}
+    end
 end

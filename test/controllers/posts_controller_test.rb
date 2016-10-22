@@ -22,6 +22,7 @@ class PostControllerTest < ActionDispatch::IntegrationTest
   end
 
   def test_button_new_post_show_posts_creat_pege
+    visit "/"
     page.click_link "Create new post"
     assert page.has_content?(app_page_title_for[:new_post])
   end
@@ -32,16 +33,11 @@ class PostControllerTest < ActionDispatch::IntegrationTest
     assert page.has_content?(app_page_title_for[:edit])
   end
 
-  def test_button_delete_post_must_delete_this_post
-    page.click_link "aaaa0"
+  def test_button_delete_post_must_delete_this_post_and_show_root_pege
+    click_on "aaaa0"
     page.click_link "Delete Post"
-    Post.all.each{|post| assert_not_equal post.title, "aaaa0"}
-  end
-
-  def test_button_delete_post_show_root_pege
-    page.click_link Post.all[0].title
-    page.click_button "Delete Post"
     assert page.has_content?(app_page_title_for[:root])
+    Post.all.each{|post| assert_not_equal post.title, "aaaa0"}
   end
 
   private
@@ -54,5 +50,4 @@ class PostControllerTest < ActionDispatch::IntegrationTest
      :new_post => "New post",
      :edit => "Edit Post"}
   end
-
 end
