@@ -1,0 +1,57 @@
+regex_login=/[a-zA-Z]+_{0,1}[a-zA-Z]+/;
+$(document).ready(function(){
+  $("#user_login").keyup(function() {
+    logins = $("#logins").val()
+    name = $("#user_login").val();
+    if (($.inArray(name, logins)==-1)&&(name.match(regex_login)==name))
+      {$(".validation-false").eq(0).css("visibility", "hidden");
+       $(".validation-true").eq(0).css("visibility", "visible");};
+    if (($.inArray(name, logins)==0)||(name.match(regex_login)!=name))
+      {$(".validation-true").eq(0).css("visibility", "hidden");
+       $(".validation-false").eq(0).css("visibility", "visible");};
+});});
+
+regex_email=/[\w+\-.]+@[a-z\d\-.]+\.[a-z]+/i;
+$(document).ready(function(){
+  $("#user_email").keyup(function() {
+    emails = $("#emails").val()
+    email = $("#user_email").val();
+    if (($.inArray(email, emails)==-1)&&(email.match(regex_email)==email))
+      {$(".validation-false").eq(1).css("visibility", "hidden");
+       $(".validation-true").eq(1).css("visibility", "visible");};
+    if (($.inArray(email, emails)==0)||(email.match(regex_email)!=email))
+      {$(".validation-true").eq(1).css("visibility", "hidden");
+       $(".validation-false").eq(1).css("visibility", "visible");};
+});});
+
+$(document).ready(function(){
+  $("#user_password").keyup(function() {
+    pass = $("#user_password").val();
+    pass_confirm = $("#user_password_confirmation").val();
+    if (pass==pass_confirm&&pass!="")
+      {$(".validation-false").eq(2).css("visibility", "hidden");
+       $(".validation-false").eq(3).css("visibility", "hidden");
+       $(".validation-true").eq(2).css("visibility", "visible");
+       $(".validation-true").eq(3).css("visibility", "visible");};
+    if (pass!=pass_confirm&&pass!="")
+      {$(".validation-true").eq(2).css("visibility", "hidden");
+       $(".validation-true").eq(3).css("visibility", "hidden");
+       $(".validation-false").eq(2).css("visibility", "visible");
+       $(".validation-false").eq(3).css("visibility", "visible");};
+});});
+
+$(document).ready(function(){
+  $("#user_password_confirmation").keyup(function() {
+    pass = $("#user_password").val();
+    pass_confirm = $("#user_password_confirmation").val();
+    if (pass==pass_confirm&&pass!="")
+      {$(".validation-false").eq(2).css("visibility", "hidden");
+       $(".validation-false").eq(3).css("visibility", "hidden");
+       $(".validation-true").eq(2).css("visibility", "visible");
+       $(".validation-true").eq(3).css("visibility", "visible");};
+    if (pass!=pass_confirm&&pass!="")
+      {$(".validation-true").eq(2).css("visibility", "hidden");
+       $(".validation-true").eq(3).css("visibility", "hidden");
+       $(".validation-false").eq(2).css("visibility", "visible");
+       $(".validation-false").eq(3).css("visibility", "visible");};
+});});

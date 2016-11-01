@@ -1,0 +1,71 @@
+<div class="user-forms">
+  <%= form_for @user do |form| %>
+    <% if @user.errors.any? %>
+      <h1 class="title-error-message">
+        Sorry, your data is not valid. Please, try again.
+      </h1>
+    <% end %>
+
+    <% if @user.errors[:login].any? %>
+      <div class="error-message">
+        <ul>
+          <% @user.errors[:login].each do |msg| %>
+          <li>*<%= msg.capitalize %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="field">
+      <%= form.label :login %>
+      <hr class="hint" data-toggle="tooltip" data-placement="right" title="Login must consist only english letters and underscore between words">
+    </div>
+    <%= form.text_field :login, class: "user_login" %>
+    <hr class="validation-true"><hr class="validation-false"><br>
+    <input value="<%= @logins %>" id="logins" hidden="true">
+
+
+    <% if @user.errors[:email].any? %>
+      <div class="error-message">
+        <ul>
+          <% @user.errors[:email].each do |msg| %>
+          <li>*<%= msg.capitalize %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="field">
+      <%= form.label :email %>
+      <hr class="hint" data-toggle="tooltip" data-placement="right" title="Enter your current email">
+    </div><br>
+    <%= form.text_field :email, class: "user_email" %>
+    <hr class="validation-true"><hr class="validation-false"><br>
+    <input value="<%= @emails %>" id="emails" hidden="true">
+
+    <% if @user.errors[:password].any? %>
+      <div class="error-message">
+        <ul>
+          <% @user.errors[:password].each do |msg| %>
+          <li>*<%= msg.capitalize %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="field">
+      <%= form.label :password %>
+      <hr class="hint"  data-toggle="tooltip" data-placement="right" title="Password must contain one regular, one upper letter and one number">
+    </div>
+    <%= form.password_field :password, class: "user_password" %>
+    <hr class="validation-true"><hr class="validation-false"><br>
+    <div class="field">
+      <%= form.label :password_confirmation, "Confirmation" %>
+    </div>
+    <%= form.password_field :password_confirmation, class: "user_password_confirmation" %>
+    <hr class="validation-true"><hr class="validation-false"><br>
+
+    <div class="text-center">
+      <%= button_tag(type: 'submit', class: "btn btn-sm btn-warning") do %>
+        Registration
+      <% end %>
+    </div>
+  <% end %>
+</div>

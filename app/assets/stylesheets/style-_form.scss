@@ -5,21 +5,6 @@ div.post-forms
   width: 65%;
   margin: auto;
 
-  h1.title-error-message
-  {
-    color: red;
-    margin-left: -30px;
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
-
-  .error-message
-  {
-    color: red;
-    margin-left: 10%;
-    font-size: 12px;
-  }
-
   .post-create-title
   {
     width: 90%;
@@ -56,4 +41,104 @@ div.post-forms
     width: 100px;
     margin-left: 45%;
   }
+}
+
+div.user-forms
+{
+  .field
+  {
+    display: block;
+    height: 26px;
+    width: 100%;
+    padding: 1px 1px 1px 1px;
+    float: left;
+  }
+
+  .user_login
+  {
+    width: 200px;
+    margin-bottom: 2%;
+    margin-top: -26px;
+    margin-left: 80px;
+    float: left;
+  }
+
+  .user_email
+  {
+    width: 200px;
+    margin-bottom: 4%;
+    margin-top: -26px;
+    margin-left: 80px;
+    float: left;
+    z-index: 100;
+  }
+
+  .user_password
+  {
+    width: 200px;
+    margin-bottom: 1%;
+    margin-top: -26px;
+    margin-left: 80px;
+    float: left;
+  }
+
+  .user_password_confirmation
+  {
+    width: 200px;
+    margin-bottom: 2%;
+    margin-top: -26px;
+    margin-left: 80px;
+    float: left;
+  }
+
+  label
+  {
+    display: block;
+    width: 20px;
+    float: left;
+    margin-left: -30px;
+    padding-top: 1%;
+    margin-bottom: -3%;
+    clear: both;
+  }
+
+  .validation-true
+  {
+    width: 20px;
+    height: 20px;
+    float: left;
+    background: url(true.png) no-repeat;
+    background-size: cover;
+    margin-top: -26px;
+    margin-left: 5px;
+    margin-bottom: 0px;
+    visibility: hidden;
+  }
+
+  .validation-false
+  {
+    width: 20px;
+    height: 20px;
+    float: left;
+    background: url(false.png) no-repeat;
+    background-size: cover;
+    margin-top: -26px;
+    margin-left: 5px;
+    margin-bottom: 0px;
+    visibility: hidden;
+  }
+
+  .hint
+  {
+    width: 20px;
+    height: 20px;
+    float: left;
+    background: url(hint.png) no-repeat;
+    background-size: cover;
+    margin-top: 5px;
+    margin-left: 40px;
+    margin-bottom: 0px;
+  }
+
+  div { clear: both; }
 }

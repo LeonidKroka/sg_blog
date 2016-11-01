@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  get 'users/new'
-
   root "posts#index"
+
+  resources :users
+
   resources :posts do
     resources :comments
   end
