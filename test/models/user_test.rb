@@ -23,6 +23,10 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  def test_authenticated_method
+    assert_not @user.authenticated?(:activation, '')
+  end
+
   private
     def validation(hash, &block)
       hash[:invalid].each do |invalid|

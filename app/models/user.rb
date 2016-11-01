@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
-
+  before_create :create_activation_digest
+  attr_accessor :activation_token
   VALID_LOGIN_REGEX = /\A[a-zA-Z]+_{0,1}[a-zA-Z]+\z/
   validates :login, presence: true,
                     length: { in: 5..15 },
@@ -18,4 +19,25 @@ class User < ActiveRecord::Base
                        format: { with: VALID_PASS_REGEX , message: "must include lower, upper letter and num"}
 
   has_secure_password
+
+  def User.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
+
+  def User.new_token
+    SecureRandom.urlsafe_base64
+  end
+
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
+  end
+
+  private
+    def create_activation_digest
+      self.activation_token  = User.new_token
+      self.activation_digest = User.digest(activation_token)
+    end
 end
