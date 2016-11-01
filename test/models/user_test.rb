@@ -9,41 +9,32 @@ class UserTest < ActiveSupport::TestCase
   end
 
   def test_login_validation
-    user_data[:login][:invalid].each do |login|
-      @user.login = login
-      assert @user.invalid?
-    end
-    user_data[:login][:valid].each do |login|
-      @user.login = login
-      assert @user.valid?
-    end
+    validation user_data[:login] {|value| @user.login = value}
   end
 
   def test_email_validation
-    user_data[:email][:invalid].each do |email|
-      @user.email = email
-      assert @user.invalid?
-    end
-    user_data[:email][:valid].each do |email|
-      @user.email = email
-      assert @user.valid?
-    end
+    validation user_data[:email] {|value| @user.email = value}
   end
 
   def test_password_validation
-    user_data[:pass][:invalid].each do |pass|
-      @user.password = pass
-      @user.password_confirmation = pass
-      assert @user.invalid?
-    end
-    user_data[:pass][:valid].each do |pass|
-      @user.password = pass
-      @user.password_confirmation = pass
-      assert @user.valid?
+    validation user_data[:pass] do |value|
+      @user.password = value
+      @user.password_confirmation = value
     end
   end
 
   private
+    def validation(hash, &block)
+      hash[:invalid].each do |invalid|
+        yield invalid
+        assert @user.invalid?
+      end
+      hash[:valid].each do |valid|
+        yield valid
+        assert @user.valid?
+      end
+    end
+
     def user_data
       {:login => {:valid => ["aaaaa", "some_text", "SOME_TEXT"],
                   :invalid => ["", "aaaa", "a"*20, "some@text", "_aaaaa_"]},
