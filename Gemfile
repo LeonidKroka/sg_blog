@@ -12,6 +12,8 @@ gem 'carrierwave'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'bcrypt-ruby'
+gem 'gmaps4rails'
+gem 'coffee-rails'
 
 group :development, :test do
   gem 'byebug'

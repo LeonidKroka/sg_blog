@@ -29,6 +29,9 @@ class ActionDispatch::IntegrationTest
   Capybara.default_driver = :webkit
   Capybara.javascript_driver = :webkit
   Capybara.default_max_wait_time = 10
+  Capybara::Webkit.configure do |config|
+    config.allow_unknown_urls
+  end
 
   setup do
     DatabaseCleaner.start

@@ -41,3 +41,86 @@
     width: 80%;
   }
 }
+
+.user-profile
+{
+  clear: both;
+  width: 1050px;
+  margin: auto;
+
+  h2
+  {
+    color: rgba(0, 0, 0, 0.74);
+    font-size: 25px;
+  }
+
+  .user-data
+  {
+    width: 500px;
+    float: left;
+
+    .user-info
+    {
+      margin: auto;
+      width: 321px;
+      height: 153px;
+      border: 2px groove rgba(51, 122, 183, 0.76);
+      padding: 5px 2px 2px 2px;
+
+      h2
+      {
+        margin-top: 2px;
+        margin-bottom: 2px;
+        color: rgba(0, 0, 0, 0.74);
+      }
+
+      .user-info-title
+      {
+        float: left;
+        width: 110px;
+        border: 2px groove rgba(51, 122, 183, 0.76);
+        padding: 5px 5px 5px 10px;
+      }
+
+      .user-info-data
+      {
+        float: left;
+        width: 200px;
+        border: 2px groove rgba(51, 122, 183, 0.76);
+        padding: 5px 5px 5px 10px;
+        margin-left: 3px;
+      }
+    }
+
+    .user-map
+    {
+      padding-top: 10px;
+
+      #map
+      {
+       height: 300px;
+       width: 500px;
+      }
+    }
+  }
+
+  .users-posts
+  {
+    float: left;
+    width: 500px;
+    margin-left: 50px;
+
+    h2
+    {
+      margin-top: 5px;
+      margin-bottom: 5px;
+      color: rgba(0, 0, 0, 0.74);
+      font-size: 16px;
+    }
+
+    p
+    {
+      text-align: center;
+    }
+  }
+}

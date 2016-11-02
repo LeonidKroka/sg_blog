@@ -9,7 +9,8 @@ $(document).ready(function(){
     if (($.inArray(name, logins)==0)||(name.match(regex_login)!=name))
       {$(".validation-true").eq(0).css("visibility", "hidden");
        $(".validation-false").eq(0).css("visibility", "visible");};
-});});
+  });
+});
 
 regex_email=/[\w+\-.]+@[a-z\d\-.]+\.[a-z]+/i;
 $(document).ready(function(){
@@ -22,36 +23,66 @@ $(document).ready(function(){
     if (($.inArray(email, emails)==0)||(email.match(regex_email)!=email))
       {$(".validation-true").eq(1).css("visibility", "hidden");
        $(".validation-false").eq(1).css("visibility", "visible");};
-});});
+  });
+});
 
 $(document).ready(function(){
   $("#user_password").keyup(function() {
     var pass = $("#user_password").val();
-    var pass_confirm = $("#user_password_confirmation").val();
-    if (pass==pass_confirm&&pass!="")
+    var passConfirm = $("#user_password_confirmation").val();
+    if (pass==passConfirm&&pass!="")
       {$(".validation-false").eq(2).css("visibility", "hidden");
        $(".validation-false").eq(3).css("visibility", "hidden");
        $(".validation-true").eq(2).css("visibility", "visible");
        $(".validation-true").eq(3).css("visibility", "visible");};
-    if (pass!=pass_confirm&&pass!="")
+    if (pass!=passConfirm&&pass!="")
       {$(".validation-true").eq(2).css("visibility", "hidden");
        $(".validation-true").eq(3).css("visibility", "hidden");
        $(".validation-false").eq(2).css("visibility", "visible");
        $(".validation-false").eq(3).css("visibility", "visible");};
-});});
+  });
+});
 
 $(document).ready(function(){
   $("#user_password_confirmation").keyup(function() {
     var pass = $("#user_password").val();
-    var pass_confirm = $("#user_password_confirmation").val();
-    if (pass==pass_confirm&&pass!="")
+    var passConfirm = $("#user_password_confirmation").val();
+    if (pass==passConfirm&&pass!="")
       {$(".validation-false").eq(2).css("visibility", "hidden");
        $(".validation-false").eq(3).css("visibility", "hidden");
        $(".validation-true").eq(2).css("visibility", "visible");
        $(".validation-true").eq(3).css("visibility", "visible");};
-    if (pass!=pass_confirm&&pass!="")
+    if (pass!=passConfirm&&pass!="")
       {$(".validation-true").eq(2).css("visibility", "hidden");
        $(".validation-true").eq(3).css("visibility", "hidden");
        $(".validation-false").eq(2).css("visibility", "visible");
        $(".validation-false").eq(3).css("visibility", "visible");};
-});});
+  });
+});
+
+
+function initMap() {
+  var userLat=parseFloat($("#latitude").val())
+  var userLng=parseFloat($("#longitude").val())
+  var login=$("#set_user_login").val()
+  var uluru = {lat: userLat,
+               lng: userLng};
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 12,
+    center: uluru
+  });
+  var marker = new google.maps.Marker({
+    position: uluru,
+    map: map,
+    label: login
+  });
+}
+
+function getGeoLocation() {
+  navigator.geolocation.getCurrentPosition(setGeoCookie);
+}
+
+function setGeoCookie(position) {
+  var cookie_val = position.coords.latitude + "|" + position.coords.longitude;
+  document.cookie = "lat_lng=" + escape(cookie_val);
+}

@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.latitude, @user.longitude = cookies[:lat_lng].split("|")
     if @user.save
       UserMailer.account_activation(@user).deliver_now
       redirect_to @user
@@ -16,10 +17,18 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
+    @activity = find_activity @user
+    @posts = @user.posts.paginate(page: params[:page], per_page: 5).order('id DESC')
   end
 
   private
     def user_params
       params.require(:user).permit(:login, :email, :password, :password_confirmation)
+    end
+
+    def find_activity user
+      {:post => user.posts.all.count,
+       :comment => user.comments.all.count}
     end
 end

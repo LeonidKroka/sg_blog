@@ -1,0 +1,50 @@
+<% provide(:title, "#{@user.login}") %>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFP-FIGvty8e3Ogl9zqAI_cG9iaKaZB4k&callback=initMap"
+  async defer>
+</script>
+
+<div class="user-profile">
+
+  <h2><%= @user.login %></h2>
+  <div class="user-data">
+
+    <div class="user-info">
+      <h2>Profile</h2>
+      <div class="user-info-title">
+        <p>User's email:</p>
+        <p>Registrated:</p>
+        <p>Activity:</p>
+      </div>
+      <div class="user-info-data">
+        <p><%= @user.email %></p>
+        <p><%= @user.created_at %></p>
+        <p><%= "#{pluralize(@activity[:post], 'post')}"%>
+           and <%= "#{pluralize(@activity[:comment], 'comment')}"%></p>
+      </div>
+    </div>
+
+    <div class="user-map">
+      <div id="map"></div>
+      <form hidden="true">
+        <input value="<%= @user.latitude %>" id="latitude" >
+        <input value="<%= @user.longitude %>" id="longitude" >
+        <input value="<%= @user.login %>" id="set_user_login" >
+      </form>
+    </div>
+  </div>
+
+  <div class="users-posts">
+    <h2>User's post</h2>
+    <% if @activity[:post]!=0 %>
+      <% @posts.each do |post| %>
+        <%= link_to post_path(post.id), class: "list-group-item" do %>
+          <h4 class="list-group-item-heading"><%= post.title %></h4>
+        <% end %>
+      <% end %>
+      <%= will_paginate @posts %>
+    <% else %>
+      <p>User not created any message.</p>
+    <% end %>
+  </div>
+
+</div>
