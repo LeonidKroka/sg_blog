@@ -142,3 +142,63 @@ div.user-forms
 
   div { clear: both; }
 }
+
+div.sessions-forms
+{
+  label
+  {
+    visibility: hidden;
+    clear: both;
+    width: 1px;
+  }
+
+  input
+  {
+    margin-left: 50px;
+    width: 200px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+  }
+
+  p
+  {
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: -10px;
+  }
+
+  .alert-errors
+  {
+    color: red;
+    text-align: center;
+    padding-left: 10px;
+  }
+
+  label.checkbox
+  {
+    visibility: visible;
+    margin-left: 50px;
+    width: 200px;
+    padding-left: 10px;
+  }
+
+  .checkbox
+  {
+    margin-top: -10px;
+    margin-bottom: 10px;
+    span
+    {
+      margin-left: -5px;
+      font-weight: normal;
+      padding-left: 25px;
+      padding-right: 10px;
+    }
+  }
+
+  #session_remember_me
+  {
+    width: auto;
+    margin-left: 0;
+    margin-top: 5px;
+  }
+}

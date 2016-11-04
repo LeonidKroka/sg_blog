@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102124542) do
+ActiveRecord::Schema.define(version: 20161103093107) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "commenter"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20161102124542) do
     t.time     "activated_at"
     t.string   "latitude"
     t.string   "longitude"
+    t.string   "remember_digest"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

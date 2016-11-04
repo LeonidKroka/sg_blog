@@ -9,6 +9,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.latitude, @user.longitude = cookies[:lat_lng].split("|")
     if @user.save
+      log_in @user
+      flash[:error_activation] = 'Account is not activated.' unless @user.activated
       UserMailer.account_activation(@user).deliver_now
       redirect_to @user
     else

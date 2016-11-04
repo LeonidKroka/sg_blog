@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 
   before_save { self.email = email.downcase }
   before_create :create_activation_digest
-  attr_accessor :activation_token
+  attr_accessor :activation_token, :remember_token
   VALID_LOGIN_REGEX = /\A[a-zA-Z]+_{0,1}[a-zA-Z]+\z/
   validates :login, presence: true,
                     length: { in: 5..15 },
@@ -36,6 +36,15 @@ class User < ActiveRecord::Base
     digest = send("#{attribute}_digest")
     return false if digest.nil?
     BCrypt::Password.new(digest).is_password?(token)
+  end
+
+  def remember
+    self.remember_token = User.new_token
+    update_attribute(:remember_digest, User.digest(remember_token))
+  end
+
+  def forget
+    update_attribute(:remember_digest, nil)
   end
 
   private

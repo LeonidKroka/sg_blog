@@ -23,6 +23,7 @@ class ActiveSupport::TestCase
 end
 
 class ActionDispatch::IntegrationTest
+  include SessionsHelper
   include Capybara::DSL
   self.use_transactional_fixtures = false
   DatabaseCleaner.strategy = :truncation
@@ -31,6 +32,7 @@ class ActionDispatch::IntegrationTest
   Capybara.default_max_wait_time = 10
   Capybara::Webkit.configure do |config|
     config.allow_unknown_urls
+    config.ignore_ssl_errors
   end
 
   setup do

@@ -6,6 +6,9 @@
 <div class="user-profile">
 
   <h2><%= @user.login %></h2>
+  <% if flash[:error_activation] %>
+    <%= content_tag(:div, flash[:error_activation], class: "activation_error") %>
+  <% end %>
   <div class="user-data">
 
     <div class="user-info">

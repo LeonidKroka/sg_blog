@@ -1,0 +1,26 @@
+<div class="sessions-forms">
+  <%= content_tag(:div, flash[:error], class: "alert-errors") %>
+  <%= form_for(:session, url: login_path) do |form| %>
+    <%= form.label :login %>
+    <%= form.text_field :login, placeholder: "Login",
+                                autofocus: "true",
+                                tabindex: "1" %><br>
+
+    <%= form.label :password %>
+    <%= form.password_field :password, placeholder: "Password",
+                                       autofocus: "true",
+                                       tabindex: "1" %>
+
+    <%= form.label :remember_me, class: "checkbox inline" do %>
+      <%= form.check_box :remember_me %>
+      <span class="label label-success">Remember me</span>
+    <%end%>
+
+    <div class="text-center">
+      <%= button_tag(type: 'submit', class: "btn btn-sm btn-warning") do %>
+        Log in
+      <% end %>
+    </div>
+  <% end %>
+  <p><%= link_to "New user?", new_user_path, method: :get %></p>
+</div>

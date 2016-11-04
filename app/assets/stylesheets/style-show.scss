@@ -63,7 +63,7 @@
     {
       margin: auto;
       width: 321px;
-      height: 153px;
+      height: 162px;
       border: 2px groove rgba(51, 122, 183, 0.76);
       padding: 5px 2px 2px 2px;
 
@@ -122,5 +122,19 @@
     {
       text-align: center;
     }
+  }
+
+  .activation_error
+  {
+    color: red;
+    font-size: 16px;
+    background: rgba(183, 78, 51, 0.31);
+    width: 200px;
+    height: 20px;
+    margin: auto;
+    margin-top: -20px;
+    margin-bottom: 10px;
+    text-align: center;
+    border-radius: 6px;
   }
 }

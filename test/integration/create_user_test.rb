@@ -3,6 +3,7 @@ require "test_helper"
 class NewUserTest < ActiveSupport::TestCase
   def setup
     visit "/users/new"
+    page.execute_script('document.cookie = "lat_lng=" + "50|50";')
   end
 
   def test_create_new_post_and_press_submit_must_add_new_post
