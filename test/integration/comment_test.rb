@@ -1,6 +1,13 @@
+require "test_helper"
+
 class PostCommentTest < ActionDispatch::IntegrationTest
+  include SessionLogIn
+
   def setup
-    Post.create(title: "aaaa1", body: "A"*200)
+    Post.create(title: "Some text",
+                body: "A"*200,
+                user_id: 1)
+    log_in_as_new_user
   end
 
   def test_create_new_valid_comment
@@ -33,7 +40,8 @@ class PostCommentTest < ActionDispatch::IntegrationTest
   end
 
   def test_invalid_coment_edit_form_should_have_error_message_and_red_border
-    Post.all[0].comments.create(:body => "valid")
+    Post.all[0].comments.create(:body => "valid",
+                                :user_id => 1)
     visit post_path(id: 1)
     within("div.comments") { click_on "Edit" }
     within("div.comment-edit-forms") do
@@ -45,7 +53,8 @@ class PostCommentTest < ActionDispatch::IntegrationTest
   end
 
   def test_valid_coment_edit_should_update_comment_and_hide_comment_edit_form
-    Post.all[0].comments.create(:body => "valid")
+    Post.all[0].comments.create(:body => "valid",
+                                :user_id => 1)
     visit post_path(id: 1)
     within("div.comments") { click_on "Edit" }
     within("div.comment-edit-forms") do
@@ -57,7 +66,8 @@ class PostCommentTest < ActionDispatch::IntegrationTest
   end
 
   def test_one_page_show_only_ten_comments
-    11.times {|n| Post.all[0].comments.create(:body => "valid_#{n}")}
+    11.times {|n| Post.all[0].comments.create(:body => "valid_#{n}",
+                                              :user_id => 1)}
     visit "/posts/1"
     assert_equal 10, page.all(".list-group-item").count
     assert_equal 2, (page.all(".pagination li").count-4)/2

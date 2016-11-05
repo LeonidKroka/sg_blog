@@ -44,3 +44,20 @@ class ActionDispatch::IntegrationTest
     Capybara.reset_sessions!
   end
 end
+
+module SessionLogIn
+  def log_in_as_new_user
+    user = User.create( login: "True_login",
+                        email: "true_mail@example.com",
+                        password: "True0pass",
+                        password_confirmation: "True0pass",
+                        latitude: "50",
+                        longitude: "50" )
+    visit "/login"
+    find('#session_login').set(user.login)
+    find('#session_password').set(user.password)
+    find(:css, "#session_remember_me").set(true)
+    click_on "Log in"
+    sleep(3)
+  end
+end

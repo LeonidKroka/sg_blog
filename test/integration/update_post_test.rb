@@ -1,8 +1,14 @@
 require "test_helper"
 
 class EditPostTest < ActiveSupport::TestCase
+  include SessionLogIn
+  
   def setup
-    Post.create(title: "aaaa1", body: "A"*200)
+    log_in_as_new_user
+    Post.create(title: "aaaa1",
+                body: "A"*200,
+                user_id: 1)
+    sleep(1)
     visit "/posts/1/edit"
   end
 

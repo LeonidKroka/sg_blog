@@ -1,9 +1,11 @@
+def users_login
+  ["Noldor", "Chipchilinka", "pink_pony", "Sad_dog", "admin"]
+end
+
 def posts_title
-  ["Libero finibus",
-   "Viverra tincidunt",
-   "Duis imperdiet",
-   "Morbi sit",
-   "lacus quam"]
+  ["Libero finibus", "Viverra tincidunt", "Duis imperdiet", "Morbi sit",
+   "lacus quam", "Libero finibus", "Elementum iaculis", "Ultricies dapibus",
+   "Fusce lobortis", "Mauris velit", "Sed gravida"]
 end
 
 def posts_body
@@ -44,22 +46,80 @@ def posts_body
     ultrices ligula id enim tincidunt, id sodales mi sagittis. Vivamus bibendum
     velit nisi, sed mattis ex mattis quis. Curabitur at urna tincidunt dui
     feugiat congue. Nam quis lectus eu lorem mollis vulputate. Donec ultrices
-    dapibus tellus, at tristique enim ultricies eget."]
+    dapibus tellus, at tristique enim ultricies eget.",
+
+    "Fusce maximus leo ac ligula fringilla, id dapibus ante volutpat. Mauris id
+     bibendum urna. Vivamus pharetra lectus vitae rhoncus volutpat. Nullam ornare
+     leo eget sodales posuere. Donec eget suscipit dui, imperdiet bibendum risus.
+     Suspendisse vehicula orci vel hendrerit semper. In quis ante elit. Curabitur
+     accumsan enim ante, vitae ultrices elit egestas laoreet. Etiam sed rutrum mauris.",
+
+    "Sed bibendum volutpat odio vitae semper. Sed aliquet ex leo, a pharetra justo
+     feugiat eu. In feugiat elit sit amet velit gravida tristique. In lacinia non
+     nisl vitae vulputate. Donec iaculis, ligula eget lobortis feugiat, arcu leo
+     semper augue, a porttitor est elit vitae risus. Phasellus elementum nulla ut
+     mi fermentum, quis vehicula nisl iaculis. Aliquam at tincidunt sapien.",
+
+    "Quisque facilisis augue at semper faucibus. Nam mattis urna ac est porttitor
+     rhoncus. Mauris tortor lectus, iaculis eget lectus ut, rhoncus dignissim massa.
+     Sed auctor lectus non risus molestie elementum. Quisque imperdiet gravida sapien,
+     ut facilisis orci ornare sollicitudin.",
+
+    "Vivamus libero purus, bibendum nec massa sed, vulputate hendrerit augue. Nulla
+     quis iaculis magna. Praesent sed libero a libero consequat tincidunt. Proin et
+     quam non lacus feugiat elementum. Fusce pulvinar tempor cursus. Aliquam porta
+     libero et velit commodo, eget pulvinar felis lobortis. Mauris mollis nibh ac
+     sem iaculis facilisis. Curabitur sagittis eleifend tortor quis mattis. Donec
+     eu ornare nibh, ac semper metus. Suspendisse feugiat, dui et elementum ultricies,
+     nisl mauris viverra enim, quis sagittis orci ex vitae dolor.",
+
+    "Nunc placerat orci nec egestas rutrum. Proin ultricies mauris erat, at vulputate
+     purus mattis at. Vivamus ornare sagittis orci et fermentum. Nulla venenatis,
+     arcu nec sagittis interdum, metus justo euismod sem, at dictum ipsum urna viverra
+     elit. Maecenas ullamcorper, nibh et tincidunt laoreet, quam sem volutpat sem,
+     nec faucibus tellus turpis ut libero. Cras pretium posuere justo, at ornare
+     erat tincidunt sed.",
+
+    "Nam in nulla at dolor gravida pharetra. Maecenas mollis risus in sodales commodo.
+     Proin convallis nulla dolor, sed bibendum dolor venenatis eu. Duis malesuada
+     magna quis tempor tincidunt. Integer consequat ornare risus at lobortis.
+     Phasellus pulvinar non nunc sed condimentum. Nulla interdum finibus ipsum
+     vitae laoreet. Pellentesque habitant morbi tristique senectus et netus et
+     malesuada fames ac turpis egestas. Maecenas bibendum rhoncus velit."]
 end
 
 def comments_body
   ["What is it?",
    "+100500",
-   "I do not understand the author",
+   "I don't understand the author",
    "What am I doing here?",
-   "Very nice"]
+   "Very nice",
+   "Author is noob"]
 end
 
+def ids
+  [1, 2, 3, 4, 5]
+end
+
+ActiveRecord::Base.connection.execute("DELETE FROM users")
+ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence where name='users'")
 ActiveRecord::Base.connection.execute("DELETE FROM posts")
 ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence where name='posts'")
 ActiveRecord::Base.connection.execute("DELETE FROM comments")
 ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence where name='comments'")
-5.times do |n|
-  Post.create(title: posts_title[n-1], body: posts_body[n-1])
-  15.times {|m| Post.all[n].comments.create(:body => comments_body.sample)}
+6.times do |n|
+  User.create(login: users_login[n-1],
+              password: "Password1",
+              password_confirmation: "Password1",
+              email: "email#{n}@exemple.com",
+              latitude: "50.62#{n}581",
+              longitude: "26.25#{n}453",
+              activated: true)
+end
+11.times do |n|
+  post = Post.create(title: posts_title[n-1],
+                     body: posts_body[n-1],
+                     user_id: ids.sample)
+  15.times {|m| post.comments.create(:body => comments_body.sample,
+                                     :user_id => ids.sample)}
 end

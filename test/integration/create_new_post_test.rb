@@ -1,7 +1,10 @@
 require "test_helper"
 
 class NewPostTest < ActiveSupport::TestCase
+  include SessionLogIn
+
   def setup
+    log_in_as_new_user
     visit "/posts/new"
   end
 

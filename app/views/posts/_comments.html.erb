@@ -1,25 +1,33 @@
 <h3>Comments</h3>
 <% if @post.comments.all.count==0 %>
-  <h3>Post nobody has commented. Please leave your comments.</h3>
+  <h3 class="no-comment">Post nobody has commented. Please leave your comments.</h3>
 <% end %>
-<div class="comment-forms">
-  <%= content_tag(:div, flash[:errors], class: "alert-errors") %>
-  <%= form_for([@post, @post.comments.build], remote: true) do |form| %>
-    <%= form.text_area :body, class: "comment-create",
-                              value: flash[:body],
-                              style: flash[:style] %>
-    <%= button_tag(type: 'submit', action: :post, class: "btn btn-sm new-comment") do %>
-      It's ok!
+<% if logged? %>
+  <div class="comment-forms">
+    <%= content_tag(:div, flash[:errors], class: "alert-errors") %>
+    <%= form_for([@post, @post.comments.build], remote: true) do |form| %>
+      <%= form.text_area :body, class: "comment-create",
+                                value: flash[:body],
+                                style: flash[:style],
+                                placeholder: "Write your comment" %>
+      <%= button_tag(type: 'submit', action: :post, class: "btn btn-sm new-comment") do %>
+        It's ok!
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
+<% end %>
 
 <div class="comments">
   <%= will_paginate @comments %>
   <% @comments.each do |comment| %>
     <div class="list-group-item" id=<%= "comment-#{comment.id}" %> >
-      <p><%= comment.body %></p>
-      <%= link_to "Edit", edit_post_comment_path(@post, comment), remote: true %>
+      <p class="commenter"><%= link_to_commenter comment %></p>
+      <p class="comment-date"><%= date_format comment.created_at %></p>
+      <hr class="line">
+      <p class="comment-body"><%= comment.body %></p>
+      <% if author? comment %>
+        <%= link_to "Edit", edit_post_comment_path(@post, comment), remote: true, class: "edit-comment" %>
+      <% end %>
     </div>
   <% end %>
   <%= will_paginate @comments %>

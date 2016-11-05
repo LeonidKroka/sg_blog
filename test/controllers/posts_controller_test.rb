@@ -1,19 +1,23 @@
 require "test_helper"
 
 class PostControllerTest < ActionDispatch::IntegrationTest
+  include SessionLogIn
+
   def setup
+    log_in_as_new_user
     create_three_posts
+    sleep(3)
     visit "/"
   end
 
   def test_post_must_have_create_page
     get "/posts/new"
-    assert_equal 200, status
+    assert_equal 302, status
   end
 
   def test_post_must_have_edit_page
     get "/posts/1/edit"
-    assert_equal 200, status
+    assert_equal 302, status
   end
 
   def test_post_must_have_action_delete
@@ -42,7 +46,9 @@ class PostControllerTest < ActionDispatch::IntegrationTest
 
   private
   def create_three_posts
-    3.times { |n| Post.create(title: "aaaa#{n}", body: "A"*200) }
+    3.times { |n| Post.create(title: "aaaa#{n}",
+                              body: "A"*200,
+                              user_id: 1) }
   end
 
   def app_page_title_for

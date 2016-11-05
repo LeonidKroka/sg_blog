@@ -1,10 +1,16 @@
 class CommentsController < ApplicationController
+  before_action :wrong_url, only: [:new, :show]
+  before_action :logged_as_user, only: :create
+  before_action :correct_user,   only: [:destroy, :edit, :update]
+
   def index
   end
 
   def create
     @post = Post.find(params[:post_id])
-    @comment = @post.comments.create(comment_params)
+    @comment = @post.comments.new(comment_params)
+    @comment.user_id = current_user.id
+    @comment.save
     @comments = @post.comments.paginate(page: params[:page], per_page: 10).order('id DESC')
     flash_message
     respond_to do |format|
@@ -45,5 +51,14 @@ class CommentsController < ApplicationController
       else
         flash.clear
       end
+    end
+
+    def wrong_url
+      redirect_to root_path
+    end
+
+    def correct_user
+      post = Post.find_by(id: params[:post_id])
+      redirect_to login_path unless (current_user == User.find_by(id: post.user_id))
     end
 end

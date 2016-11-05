@@ -1,14 +1,19 @@
 <% provide(:title, "View") %>
 <div class="post-view">
-  <h2>Post's view</h2>
-  <p> <span>Title:</span><%= @post.title %> </p>
+  <h2><%= @post.title %></h2>
   <p class="post-img"><%= image_tag @post.image.url unless @post.image.file.nil? %></p>
-  <p> <span>Post:</span><%= @post.body %> </p>
-  <%= button_tag class: "post-action btn btn-sm btn-warning" do %>
-    <%= link_to "Edit Post", edit_post_path, method: :get %>
-  <% end %>
-  <%= button_tag class: "post-action btn btn-sm btn-warning" do %>
-    <%= link_to "Delete Post", post_path(@post.id), method: :delete %>
+  <p><%= @post.body %> </p>
+  <p>
+    <span class="author"><%= link_to "#{@author.login}", user_path(@author) %></span>
+    <span class="created"><%= date_format @post.created_at %></span>
+  </p>
+  <% if author? @post %>
+    <%= button_tag class: "post-action btn btn-sm btn-warning" do %>
+      <%= link_to "Edit Post", edit_post_path, method: :get %>
+    <% end %>
+    <%= button_tag class: "post-action btn btn-sm btn-warning" do %>
+      <%= link_to "Delete Post", post_path(@post.id), method: :delete %>
+    <% end %>
   <% end %>
 
   <div id="comments">
