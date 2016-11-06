@@ -81,7 +81,7 @@ class PostCommentTest < ActionDispatch::IntegrationTest
     assert_equal 1, Comment.all.count
     within("div.comments") do
       click_on "Delete"
-      assert_not page.has_content?("Text to destroy")
+      assert page.has_no_content?("Text to destroy")
       assert_equal 0, Comment.all.count
     end
   end

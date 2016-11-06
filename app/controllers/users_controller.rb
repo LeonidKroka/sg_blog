@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :correct_user,   only: [:kill, :edit, :update]
+
   def new
     @user = User.new
     @logins = User.all.map {|user| user.login}
@@ -57,5 +59,9 @@ class UsersController < ApplicationController
     def find_activity user
       {:post => user.posts.all.count,
        :comment => user.comments.all.count}
+    end
+
+    def correct_user
+      redirect_to login_path unless (current_user == User.find_by(id: params[:id]))
     end
 end

@@ -1,6 +1,6 @@
 require "test_helper"
 
-class LogInPageTest < ActiveSupport::TestCase
+class LogInPageTest < ActionDispatch::IntegrationTest
   def setup
     visit '/login'
   end
