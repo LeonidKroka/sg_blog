@@ -27,6 +27,7 @@
       <p class="comment-body"><%= comment.body %></p>
       <% if author? comment %>
         <%= link_to "Edit", edit_post_comment_path(@post, comment), remote: true, class: "edit-comment" %>
+        <%= link_to "Delete", post_comment_path(@post, comment), method: :delete, remote: true, class: "edit-comment" %>
       <% end %>
     </div>
   <% end %>

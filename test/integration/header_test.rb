@@ -1,6 +1,6 @@
 require "test_helper"
 
-class PostPageTest < ActiveSupport::TestCase
+class HeaderTest < ActiveSupport::TestCase
   include SessionLogIn
 
   def setup

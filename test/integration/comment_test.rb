@@ -72,4 +72,17 @@ class PostCommentTest < ActionDispatch::IntegrationTest
     assert_equal 10, page.all(".list-group-item").count
     assert_equal 2, (page.all(".pagination li").count-4)/2
   end
+
+  def test_destroy_comment
+    visit post_path(id: 1)
+    find("#comment_body").set("Text to destroy")
+    click_on "It's ok!"
+    assert page.has_content?("Text to destroy")
+    assert_equal 1, Comment.all.count
+    within("div.comments") do
+      click_on "Delete"
+      assert_not page.has_content?("Text to destroy")
+      assert_equal 0, Comment.all.count
+    end
+  end
 end

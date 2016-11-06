@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     @comment = @post.comments.new(comment_params)
     @comment.user_id = current_user.id
     @comment.save
-    @comments = @post.comments.paginate(page: params[:page], per_page: 10).order('id DESC')
+    refresh_comments
     flash_message
     respond_to do |format|
       format.js
@@ -30,11 +30,23 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = @post.comments.find(params[:id])
     @comment.update(comment_params)
-    @comments = @post.comments.paginate(page: params[:page], per_page: 10).order('id DESC')
+    refresh_comments
     flash_message
     respond_to do |format|
       format.js
       format.html {render @post}
+    end
+  end
+
+  def destroy
+    comment = Comment.find_by(id: params[:id])
+    comment.destroy
+
+    @post = Post.find(params[:post_id])
+    refresh_comments
+
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -58,7 +70,11 @@ class CommentsController < ApplicationController
     end
 
     def correct_user
-      post = Post.find_by(id: params[:post_id])
-      redirect_to login_path unless (current_user == User.find_by(id: post.user_id))
+      comment = Comment.find_by(id: params[:id])
+      redirect_to login_path unless (current_user == User.find_by(id: comment.user_id))
+    end
+
+    def refresh_comments
+      @comments = @post.comments.paginate(page: params[:page], per_page: 10).order('id DESC')
     end
 end
