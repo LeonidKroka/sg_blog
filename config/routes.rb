@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
+  post '/search',  to: 'posts#searching'
+  get '/search',  to: 'posts#search'
   resources :users do
     patch :kill, on: :member
   end

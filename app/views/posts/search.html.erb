@@ -1,0 +1,24 @@
+<% provide(:title, 'Search') %>
+<div class="post-list">
+  <h2> SG Blog </h2>
+
+  <%= form_for Post.new, :url => search_path,
+                         class: "form-search navbar-form navbar-left" do |form| %>
+    <div class="input-group">
+      <%= form.label :title, hidden: :true %>
+      <%= form.text_field :title, class: "form-control",
+                                  placeholder: "Search" %>
+      <span class="input-group-btn">
+        <%= button_tag(type: 'submit', class: "btn btn-default") do %>Search!<% end %>
+      </span>
+    </div>
+  <% end %><br>
+
+  <p><%= "There are no result's" if @posts.count==0 %></p>
+  <% @posts.each do |post| %>
+    <%= link_to post_path(post.id), class: "list-group-item" do %>
+      <h4 class="list-group-item-heading"><%= post.title %></h4>
+      <p class="list-group-item-text"><%= limited_posts_body(post.body) %></p>
+    <% end %>
+  <% end %>
+</div>

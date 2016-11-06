@@ -6,6 +6,19 @@ class PostsController < ApplicationController
     @posts = Post.paginate(page: params[:page], per_page: 5).order('id DESC')
   end
 
+  def searching
+    @posts = []
+    Post.all.each {|post| @posts<<post if post.title.include?(params[:post][:title])}
+    session[:search] = params[:post][:title]
+    render 'search'
+  end
+
+  def search
+    @posts = []
+    Post.all.each {|post| @posts<<post if post.title.include?(session[:search])}
+    render 'search'
+  end
+
   def show
     @post = Post.find(params[:id])
     @author = User.find_by(id: @post.user_id)
