@@ -19,7 +19,7 @@
       <%= form.label :login %>
       <hr class="hint" data-toggle="tooltip" data-placement="right" title="Login must consist only english letters and underscore between words">
     </div>
-    <%= form.text_field :login, class: "user_login" %>
+    <%= form.text_field :login, class: "user-login" %>
     <hr class="validation-true"><hr class="validation-false"><br>
     <input value="<%= @logins %>" id="logins" hidden="true">
 
@@ -37,7 +37,7 @@
       <%= form.label :email %>
       <hr class="hint" data-toggle="tooltip" data-placement="right" title="Enter your current email">
     </div><br>
-    <%= form.text_field :email, class: "user_email" %>
+    <%= form.text_field :email, class: "user-email" %>
     <hr class="validation-true"><hr class="validation-false"><br>
     <input value="<%= @emails %>" id="emails" hidden="true">
 
@@ -54,12 +54,12 @@
       <%= form.label :password %>
       <hr class="hint"  data-toggle="tooltip" data-placement="right" title="Password must contain one regular, one upper letter and one number">
     </div>
-    <%= form.password_field :password, class: "user_password" %>
+    <%= form.password_field :password, class: "user-password" %>
     <hr class="validation-true"><hr class="validation-false"><br>
     <div class="field">
       <%= form.label :password_confirmation, "Confirmation" %>
     </div>
-    <%= form.password_field :password_confirmation, class: "user_password_confirmation" %>
+    <%= form.password_field :password_confirmation, class: "user-password_confirmation" %>
     <hr class="validation-true"><hr class="validation-false"><br>
 
     <div class="text-center">

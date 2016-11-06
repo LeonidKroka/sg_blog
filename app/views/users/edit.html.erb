@@ -1,0 +1,17 @@
+<% provide(:title, 'Edit profile') %>
+<div class="user-edit">
+  <div class="tabbable">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#tab1" data-toggle="tab">User's info</a></li>
+      <li><a href="#tab2" data-toggle="tab">Delete account</a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="tab1">
+        <%= render 'edit_form' %>
+      </div>
+      <div class="tab-pane" id="tab2">
+        <%= render 'delete_form' %>
+      </div>
+    </div>
+  </div>
+</div>

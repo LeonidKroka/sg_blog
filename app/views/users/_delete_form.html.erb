@@ -1,0 +1,10 @@
+<div class="user-edit-form">
+  <%= form_for @user, :url => kill_user_path(@user) do |form| %>
+    <p>Confirm the action by entering a password</p>
+    <%= form.label :password %>
+    <%= form.password_field :password, class: "user-password" %>
+    <div class="submit">
+      <%= button_tag(type: 'submit', class: "btn btn-sm btn-warning") do %>Delete<% end %>
+    </div>
+  <% end %>
+</div>

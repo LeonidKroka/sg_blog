@@ -1,0 +1,39 @@
+<div class="user-edit-form">
+  <%= form_for @user do |form| %>
+
+    <div class="hidden">
+      <%= form.label :login %>
+      <%= form.text_field :login %>
+    </div>
+
+    <%= form.label :email %><br>
+    <% if @user.errors[:email].any? %>
+      <div class="error-message">
+        <ul>
+          <% @user.errors[:email].each do |msg| %>
+          <li>*<%= msg.capitalize %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= form.text_field :email, class: "user-email" %><br><br>
+
+    <%= form.label :password %><br>
+    <% if @user.errors[:password].any? %>
+      <div class="error-message">
+        <ul>
+          <% @user.errors[:password].each do |msg| %>
+          <li>*<%= msg.capitalize %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= form.password_field :password, class: "user-password" %><br><br>
+    <%= form.label :password_confirmation, "Confirmation" %><br>
+    <%= form.password_field :password_confirmation, class: "user-password_confirmation" %>
+
+    <div class="submit">
+      <%= button_tag(type: 'submit', class: "btn btn-sm btn-warning") do %>Update<% end %>
+    </div>
+  <% end %>
+</div>

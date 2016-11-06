@@ -24,6 +24,31 @@ class UsersController < ApplicationController
     @posts = @user.posts.paginate(page: params[:page], per_page: 5).order('id DESC')
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+
+    if @user.update(user_params)
+      redirect_to @user
+    else
+      render 'edit'
+    end
+  end
+
+  def kill
+    @user = User.find(params[:id])
+    if BCrypt::Password.new(@user.password_digest).is_password?(params[:user][:password])
+      log_out
+      @user.destroy
+      redirect_to root_path
+    else
+      redirect_to @user
+    end
+  end
+
   private
     def user_params
       params.require(:user).permit(:login, :email, :password, :password_confirmation)
