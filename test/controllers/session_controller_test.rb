@@ -15,7 +15,7 @@ class SessinControllerTest < ActionDispatch::IntegrationTest
     find('#session_login').set(@user.login)
     find('#session_password').set(@user.password)
     find(:css, "#session_remember_me").set(true)
-    click_on "Log in"
+    within('.sessions-forms') { click_on "Log in" }
     sleep(1)
     assert User.all[0].authenticated?(:remember, page.driver.cookies['remember_token'])
     assert page.has_content?(@user.email)
@@ -25,7 +25,7 @@ class SessinControllerTest < ActionDispatch::IntegrationTest
     find('#session_login').set("wrong_login")
     find('#session_password').set(@user.password)
     find('#session_remember_me').set(true)
-    click_on "Log in"
+    within('.sessions-forms') { click_on "Log in" }
     sleep(1)
     assert_not User.all[0].authenticated?(:remember, page.driver.cookies['remember_token'])
     assert page.has_no_content?(@user.email)
@@ -36,7 +36,7 @@ class SessinControllerTest < ActionDispatch::IntegrationTest
   def test_log_in_without_remember
     find('#session_login').set(@user.login)
     find('#session_password').set(@user.password)
-    click_on "Log in"
+    within('.sessions-forms') { click_on "Log in" }
     sleep(1)
     assert_not User.all[0].authenticated?(:remember, page.driver.cookies['remember_token'])
     assert page.has_content?(@user.email)

@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :correct_user,   only: [:destroy, :edit, :update]
 
   def index
-    @posts = Post.latest_five
+    @posts = Post.paginate(page: params[:page], per_page: 5).order('id DESC')
   end
 
   def show

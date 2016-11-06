@@ -32,11 +32,13 @@ class PostPageTest < ActiveSupport::TestCase
   end
 
   def test_posts_img_should_be_present_only_if_it_added_to_post
-    sleep(3)
-    assert page.has_no_selector?("img")
-    visit "/posts/2"
-    sleep(3)
-    assert page.has_selector?("img")
+    within('.post-view') do
+      sleep(3)
+      assert page.has_no_selector?("img")
+      visit "/posts/2"
+      sleep(3)
+      assert page.has_selector?("img")
+    end
   end
 
   def test_show_page_must_have_comments_form

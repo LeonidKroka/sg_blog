@@ -7,4 +7,5 @@
       <p class="list-group-item-text"><%= limited_posts_body(post.body) %></p>
     <% end %>
   <% end %>
+  <%= will_paginate @posts %>
 </div>

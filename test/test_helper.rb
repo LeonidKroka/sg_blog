@@ -57,7 +57,7 @@ module SessionLogIn
     find('#session_login').set(user.login)
     find('#session_password').set(user.password)
     find(:css, "#session_remember_me").set(true)
-    click_on "Log in"
+    within('.sessions-forms') { click_on "Log in" }
     sleep(3)
   end
 end

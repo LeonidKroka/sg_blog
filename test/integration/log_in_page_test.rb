@@ -18,7 +18,7 @@ class LogInPageTest < ActiveSupport::TestCase
   end
 
   def test_page_content_when_wrong_log_in_action
-    click_on "Log in"
+    within('.sessions-forms') { click_on "Log in" }
     sleep(1)
     assert page.has_content?('Invalid login/password combination')
   end
