@@ -1,4 +1,4 @@
-server 'your_server_ip', port: your_port_num, roles: [:web, :app, :db], primary: true
+server '192.168.11.25', port: 50022, roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@example.com:LeonidKroka/sg_blog.git'
 set :application,     'sg_blog'
