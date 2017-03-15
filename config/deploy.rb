@@ -1,6 +1,6 @@
-server '192.168.11.25:50022', port: 22, roles: [:web, :app, :db], primary: true
+server '192.168.11.25', port: 50022, roles: [:web, :app, :db], primary: true
 
-set :repo_url,        'git@example.com:LeonidKroka/sg_blog.git'
+set :repo_url,        'https://github.com/LeonidKroka/sg_blog.git'
 set :application,     'sg_blog'
 set :user,            'adminl'
 set :puma_threads,    [4, 16]
