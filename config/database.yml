@@ -21,10 +21,10 @@ test:
   database: db/test.sqlite3
 
 production:
-  adapter: postgresql
-  encoding: unicode
-  username: adminl
-  password: '[poiuy1]'
+  adapter: mysql2
+  encoding: utf8
+  username: root
+  password: 11111
   pool: 5
   timeout: 5000
   database: darker
