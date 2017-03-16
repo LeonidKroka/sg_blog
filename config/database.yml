@@ -23,8 +23,8 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  username: darkest
-  password: '11111'
+  username: adminl
+  password: '[poiuy1]'
   pool: 5
   timeout: 5000
   database: darker
