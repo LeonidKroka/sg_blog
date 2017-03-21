@@ -28,5 +28,5 @@ production:
   username: darkestroot
   password: 11111
   database: sg_blog
-  host: 192.168.11.25
+  host: localhost
   database: darker_production
