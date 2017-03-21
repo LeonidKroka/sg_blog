@@ -29,4 +29,3 @@ production:
   password: 11111
   database: sg_blog
   host: localhost
-  database: darker_production
