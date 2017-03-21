@@ -23,7 +23,7 @@ test:
 production:
   adapter: postgresql
   encoding: utf8
-  username: postgresql
+  username: darkroot
   password: 11111
   pool: 5
   timeout: 5000
