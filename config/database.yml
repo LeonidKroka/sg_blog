@@ -27,4 +27,4 @@ production:
   password: 11111
   pool: 5
   timeout: 5000
-  database: darker
+  database: darker_production
