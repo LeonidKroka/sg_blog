@@ -11,9 +11,9 @@ default: &default
 
 development:
   <<: *default
-  username: root
+  username: darkerroot
   password: 11111
-  database: test
+  database: darker_production
   host: localhost
 
 # Warning: The database defined as "test" will be erased and
@@ -21,7 +21,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: db/test.sqlite3
+  database: sg_blog
 
 production:
   <<: *default
