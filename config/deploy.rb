@@ -1,4 +1,4 @@
-server '94.176.239.54', port: 22, roles: [:web, :app, :db], primary: true
+server '94.176.239.54', roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'https://github.com/TanyaKovblyuk/sg_blog.git'
 set :application,     'sg_blog'
