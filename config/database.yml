@@ -25,7 +25,7 @@ test:
 
 production:
   <<: *default
-  username: darkestroot
-  password: 11111
-  database: sg_blog
+  username: root
+  password: 1111
+  database: darker_production
   host: localhost
