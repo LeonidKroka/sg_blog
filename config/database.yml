@@ -27,5 +27,5 @@ production:
   <<: *default
   username: root
   password: 1111
-  database: darkerroot
+  database: darkestroot
   host: localhost
