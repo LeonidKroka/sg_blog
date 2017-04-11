@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  scope "/one" do
   root "posts#index"
 
   get    '/login',   to: 'sessions#new'
@@ -12,5 +13,6 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :posts do
     resources :comments
+  end
   end
 end
