@@ -11,9 +11,9 @@ default: &default
 
 development:
   <<: *default
-  username: darkerroot
-  password: 11111
-  database: darker_production
+  username: root
+  password: 1111
+  database: sg_blog
   host: localhost
 
 # Warning: The database defined as "test" will be erased and
