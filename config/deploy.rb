@@ -79,6 +79,17 @@ namespace :deploy do
   after  :finishing,    :restart
 end
 
+namespace :backup do
+
+  desc "Upload backup config files."
+  task :upload_config do
+    on roles(:app) do
+      Rake::Task['site:backup'].reenable
+    end
+  end
+
+end
+
 # ps aux | grep puma    # Get puma pid
 # kill -s SIGUSR2 pid   # Restart puma
 # kill -s SIGTERM pid   # Stop puma
